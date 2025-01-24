@@ -1,0 +1,24 @@
+extends ../../layout/default.pug 
+
+block main
+  h2 Chi tiết sản phẩm
+  div.product-info
+    if product.name
+      p Tên sản phẩm: #{product.name}
+    if product.description
+      p Mô tả: #{product.description}
+    if product.price
+      p Giá: #{product.price}$
+    if product.discountPercentage
+      p Giảm giá: #{product.discountPercentage}%
+    if product.price && product.discountPercentage
+      p Giá sau giảm: #{(product.price - (product.price * product.discountPercentage / 100)).toFixed(2)}$
+    if product.status
+      span Trạng thái: 
+      if product.status === "active"
+        span(class="badge-success") Hoạt động
+      else
+        span(class="badge-danger") Dừng hoạt động
+    if product.image
+      img(src=product.image alt=product.name)
+    a.btn.btn-sm.btn-warning(href=`${prefixAdmin}/products/edit/${product.id}`) Sửa
